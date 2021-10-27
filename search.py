@@ -78,6 +78,8 @@ def breadth_first_search(root):
 
 
 def depth_first_search(root, depth_limit=-1):
+    """if depth_limit is negative => no depth_limit, so unlimited search
+    if depth_limit is positive its a boundary value"""
     if root.is_solved():
         return root
 
