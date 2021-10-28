@@ -20,6 +20,8 @@ def breadth_first_search(root, solved_puzzle):
 
 # cannot use decorators for recursive function :(
 def depth_first_search(root, solved_puzzle, depth_limit=-1):
+    """if depth_limit is negative => no depth_limit, so unlimited search
+    if depth_limit is positive its a boundary value"""
     if root == solved_puzzle:
         return root
 
