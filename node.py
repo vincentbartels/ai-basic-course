@@ -34,7 +34,6 @@ class Node(object):
     def __eq__(self, other):
         """Compare both matrix element wise and check if the resulting matrix has any element that is zero
         if yes, than return false."""
-        print(other)
         assert isinstance(other, Node)
         return (self.state == other.state).all()
 

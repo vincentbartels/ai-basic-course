@@ -45,6 +45,7 @@ def printer(f):
             print("no solution could be found!")
 
         else:
+            print("\n Solution found !!!")
             print("\nsolved state:")
             print(search_result)
             print(f"h1 = {h1(search_result)}; h2 = {h2(search_result)}")
