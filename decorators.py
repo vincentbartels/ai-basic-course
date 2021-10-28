@@ -1,5 +1,6 @@
 import time
 
+from node import Node
 from heuristics import h1, h2
 
 # from search import h1, h2
@@ -24,10 +25,10 @@ def timer(f):
 
 
 def printer(f):
-    def print_wrap(puzzle, solved_puzzle, **kwargs):
-        n = puzzle.state.shape[0] ** 2 - 1
+    def print_wrap(node: Node, **kwargs):
+        n = node.state.shape[0] ** 2 - 1
 
-        print(f"Searching {n}-puzzle using the '{f.__name__}' algorithm")
+        print(f"Searching {n}-node using the '{f.__name__}' algorithm")
 
         # print name of heuristic function / depth limit value
         for kw in kwargs:
@@ -35,19 +36,21 @@ def printer(f):
             print(f"with {kw} = {kw_value}")
 
         print("\ninitial state:")
-        print(puzzle)
-        print(f"h1 = {h1(puzzle, solved_puzzle)}; h2 = {h2(puzzle, solved_puzzle)}")
+        print(node)
+        print(f"h1 = {h1(node)}; h2 = {h2(node)}")
 
-        solution = f(puzzle, solved_puzzle, **kwargs)
-        if solution is None:
+
+        search_result: Node = f(node, **kwargs)
+        if search_result is None:
             print("no solution could be found!")
 
         else:
             print("\nsolved state:")
-            print(solution)
-            print(f"h1 = {h1(solution, solved_puzzle)}; h2 = {h2(solution, solved_puzzle)}")
+            print(search_result)
+            print(f"h1 = {h1(search_result)}; h2 = {h2(search_result)}")
+            print(f"solution depth: {search_result.depth}")
         print()
 
-        return solution
+        return search_result
 
     return print_wrap

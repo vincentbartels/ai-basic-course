@@ -1,12 +1,11 @@
 import numpy as np
-import random
 
 
-class Node:
-    def __init__(self, state, depth=0, predecessor=None):
-        self.state = state
+class Node(object):
+    def __init__(self, state=None, depth=0, predecessor=None):
+        self.state: np.ndarray = state
         self.depth = depth
-
+        self.solution_node: SolutionNode = SolutionNode.instance()
         self.predecessor = predecessor
 
     def expand(self):
@@ -33,29 +32,38 @@ class Node:
         self.heuristic_value = value
 
     def __eq__(self, other):
-        assert type(other) == Node
-        # only compares states not nodes!!!
+        """Compare both matrix element wise and check if the resulting matrix has any element that is zero
+        if yes, than return false."""
+        print(other)
+        assert isinstance(other, Node)
         return (self.state == other.state).all()
 
     def __lt__(self, other):
+        """Check is the heuristic of this node is less than the other."""
         assert type(other) == Node
         return self.heuristic_value < other.heuristic_value
 
     def __repr__(self) -> str:
+        """Print node state (numpy array) as string"""
+
         return str(self.state)
 
-
-def get_solution_node_state(n: int):
-    """Get solved n-puzzle numpy arrays (state)
-    :param n: Amount of cells in a n-puzzle
-    :return: 2-dimensional numpy array containing the solved n-puzzle
-    """
-    size = int((n + 1) ** 0.5)
-    return np.append(np.arange(1, n + 1), 0).reshape((size, size))
+    def is_solution(self):
+        return self == self.solution_node
 
 
-def get_random_puzzle(valid_state, random_steps=100):
-    puzzle = Node(valid_state)
-    for i in range(random_steps):
-        puzzle = random.choice(puzzle.expand())
-    return puzzle
+class SolutionNode(Node):
+    _instance = None
+
+    def __init__(self, n: int = 3):
+        raise RuntimeError('Call instance() instead')
+
+    @classmethod
+    def instance(cls, n=3):
+        if cls._instance is None:
+            print(f'Creating new instance in {n}-puzzle')
+            cls._instance = super(SolutionNode, cls).__new__(cls)
+            size = int((n + 1) ** 0.5)
+            solution_state = np.append(np.arange(1, n + 1), 0).reshape((size, size))
+            super(SolutionNode, cls._instance).__init__(solution_state)
+        return cls._instance
