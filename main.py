@@ -13,10 +13,10 @@ def get_random_puzzle(target_node, random_steps=100):
 
 
 def premade_start():
-    very_easy = np.array([[1, 2, 3], [5, 0, 8], [4, 6, 7]]) # easy^2 -> 8
-    easy = np.array([[1, 2, 3], [4, 5, 0], [6, 7, 8]]) # easy -> 11
-    medium = np.array([[2, 0, 4], [6, 7, 1], [8, 5, 3]]) # medium -> 23
-    hard = np.array([[8, 6, 7], [2, 5, 4], [3, 0, 1]]) # hard -> 31
+    very_easy = np.array([[1, 2, 3], [5, 0, 8], [4, 6, 7]])  # easy^2 -> 8
+    easy = np.array([[1, 2, 3], [4, 5, 0], [6, 7, 8]])  # easy -> 11
+    medium = np.array([[2, 0, 4], [6, 7, 1], [8, 5, 3]])  # medium -> 23
+    hard = np.array([[8, 6, 7], [2, 5, 4], [3, 0, 1]])  # hard -> 31
     return Node(state=medium)
 
 
@@ -35,6 +35,6 @@ if __name__ == "__main__":
     # depth_first_search(puzzle, depth_limit=5)  # depth_limit too low --> no solution
     # depth_first_search(puzzle, depth_limit=15)
     # breadth_first_search(puzzle)
-    iterative_deepening(puzzle)
-    A_star(puzzle, heuristic=h1)
+    # iterative_deepening(puzzle)
+    # A_star(puzzle, heuristic=h1)
     A_star(puzzle, heuristic=h2)

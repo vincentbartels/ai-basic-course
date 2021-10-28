@@ -65,7 +65,7 @@ def A_star(root, heuristic):
         else:
             for new_node in node.expand():
                 h = heuristic(new_node)
-                g = node.heuristic_value
+                g = node.depth
                 new_node.set_heuristic_value(h + g)
                 bisect.insort_left(queue, new_node)
 
