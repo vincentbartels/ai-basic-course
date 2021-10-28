@@ -1,7 +1,7 @@
 import random
 import numpy as np
 
-from n_puzzle import Node, get_solution_node_state, get_random_puzzle
+from node import Node, get_solution_node_state, get_random_puzzle
 from search import breadth_first_search, iterative_deepening, A_star, depth_first_search
 from heuristics import h1, h2
 
