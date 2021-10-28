@@ -45,9 +45,12 @@ class Node:
         return str(self.state)
 
 
-def get_solved_state(n):
+def get_solution_node_state(n: int):
+    """Get solved n-puzzle numpy arrays (state)
+    :param n: Amount of cells in a n-puzzle
+    :return: 2-dimensional numpy array containing the solved n-puzzle
+    """
     size = int((n + 1) ** 0.5)
-
     return np.append(np.arange(1, n + 1), 0).reshape((size, size))
 
 
