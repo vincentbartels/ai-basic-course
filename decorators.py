@@ -38,20 +38,29 @@ def printer(f):
         print("\ninitial state:")
         print(node)
         print(f"h1 = {h1(node)}; h2 = {h2(node)}")
-
+        print()
 
         search_result: Node = f(node, **kwargs)
         if search_result is None:
             print("no solution could be found!")
 
         else:
-            print("\n Solution found !!!")
-            print("\nsolved state:")
-            print(search_result)
-            print(f"h1 = {h1(search_result)}; h2 = {h2(search_result)}")
-            print(f"solution depth: {search_result.depth}")
+            print_node_path(search_result)
         print()
 
         return search_result
 
     return print_wrap
+
+
+def print_node_path(node):
+    node_path = []
+    while node is not None:
+        node_path.insert(0, node)
+        node = node.parent
+
+    for node in node_path:
+        print(node)
+        print(f"h1 = {h1(node)}; h2 = {h2(node)}")
+        print(f"depth = {node.depth}")
+        print()

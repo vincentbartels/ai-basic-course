@@ -24,7 +24,7 @@ def depth_first_search(root, depth_limit=-1):
     """Depth search algorithm wrapper so that we call the decorators only once.
     The recursive depth_first_search_algorithm would call it on every recursion.
     """
-    depth_first_search_algorithm(root, depth_limit)
+    return depth_first_search_algorithm(root, depth_limit)
 
 
 def depth_first_search_algorithm(root: Node, depth_limit):

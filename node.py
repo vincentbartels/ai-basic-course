@@ -2,11 +2,11 @@ import numpy as np
 
 
 class Node(object):
-    def __init__(self, state=None, depth=0, predecessor=None):
+    def __init__(self, state=None, depth=0, parent=None):
         self.state: np.ndarray = state
         self.depth = depth
+        self.parent = parent
         self.solution_node: SolutionNode = SolutionNode.instance()
-        self.predecessor = predecessor
 
     def expand(self):
         successors = []
@@ -24,7 +24,7 @@ class Node(object):
                     new_state[tuple(new_pos)],
                     new_state[tuple(pos)],
                 )
-                successors.append(Node(new_state, depth=self.depth + 1, predecessor=self))
+                successors.append(Node(new_state, depth=self.depth + 1, parent=self))
 
         return successors
 
@@ -55,12 +55,12 @@ class SolutionNode(Node):
     _instance = None
 
     def __init__(self, n: int = 3):
-        raise RuntimeError('Call instance() instead')
+        raise RuntimeError("Call instance() instead")
 
     @classmethod
     def instance(cls, n=3):
         if cls._instance is None:
-            print(f'Creating new instance in {n}-puzzle')
+            print(f"Creating new instance in {n}-puzzle")
             cls._instance = super(SolutionNode, cls).__new__(cls)
             size = int((n + 1) ** 0.5)
             solution_state = np.append(np.arange(1, n + 1), 0).reshape((size, size))

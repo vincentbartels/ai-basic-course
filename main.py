@@ -33,7 +33,7 @@ if __name__ == "__main__":
     # depth_first_search(puzzle, depth_limit=5)  # depth_limit too low --> no solution
     # depth_first_search(puzzle, depth_limit=100)
     # breadth_first_search(puzzle)
-    # iterative_deepening(puzzle)
+    iterative_deepening(puzzle)
 
-    # A_star(puzzle, heuristic=h1)
+    A_star(puzzle, heuristic=h1)
     A_star(puzzle, heuristic=h2)
