@@ -27,14 +27,14 @@ def depth_first_search(root, depth_limit=-1):
     return depth_first_search_algorithm(root, depth_limit)
 
 
-def depth_first_search_algorithm(root: Node, depth_limit):
+def depth_first_search_algorithm(node: Node, depth_limit):
     """if depth_limit is negative => no depth_limit, so unlimited search
     if depth_limit is positive its a boundary value"""
-    if root.is_solution():
-        return root
+    if node.is_solution():
+        return node
 
     if depth_limit != 0:
-        for node in root.expand():
+        for node in node.expand():
             solution = depth_first_search_algorithm(node, depth_limit - 1)
             if solution is not None:
                 return solution
